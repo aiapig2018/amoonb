@@ -1,0 +1,141 @@
+
+{% extends "base.html" %}
+{% load static %}
+
+{% load blog_tags %}
+
+{% if error_msg %}
+        <p>{{ error_msg }}</p>
+    {% endif %}
+
+
+
+
+
+
+
+
+{% block content %}
+ 
+  
+
+
+
+
+    <div class="cd-secondary-navabc">
+        <a href="#0" class="cd-secondary-navabc-trigger">Menu<span></span></a> <!-- button visible on small devices -->
+        <nav>
+            <ul>
+                <li style="margin-left: 2em;">
+                    <a href="#cd-placeholder-1">
+                        <b>主题</b>
+                        
+                    </a>
+                </li>
+               
+                <li style="margin-left: 2em;">
+                    <a href="#cd-placeholder-3">
+                        <b>详情</b>
+                        
+                    </a>
+                </li>
+                <li style="margin-left: 2em;">
+                    <a href="#cd-placeholder-4">
+                        <b>评价</b>
+                        
+                    </a>
+                </li>
+           
+               
+
+            </ul>
+        </nav>
+       
+    </div> <!-- .cd-secondary-navabc -->
+
+
+
+
+
+
+
+
+  <section id="cd-placeholder-1" class="cd-section cd-container">
+      <div class="left-col" style="width: 70%; border-right: 1px solid #ddd;">
+          <section>
+            <div class="_ct1v4k4 amoonbtitle1" id="cd-introabc-taglineabc" style="border-bottom: 1px solid #eee;">
+                <h2>{{ post.title }}</h2>
+            </div>
+            <div class="row amoonbtitle2" style="padding: 1em 0;">
+              <div class="col-md-4"><h2 style="color: #db3742 !important;">{{ post.views }}<p>访问量</p></h2></div>
+              <div class="col-md-4"><h2 style="color: #db3742 !important;">{{ post.comment_set.count }}<p>评价数</p></h2></div>
+              <div class="col-md-4"><div class="_ct1v5k5">
+                  <a href="#"><img src="http://pg9h99o86.bkt.clouddn.com/7.jpg" title="发布者"></a>
+                  {{ post.author }}
+          </div></div>
+            </div>
+            <div class="row amoonbtitle3" style="padding: 0 1em">{{ post.body|safe }}</div>
+          </section>
+      </div>
+      <div class="right-col amoonbtitle4" style="width: 30%;">
+        
+      </div> 
+    </section>
+
+
+
+
+
+      <section class="container clearfix">   
+        <div class="row">
+          <div style="width: 100%">
+            
+
+        <section id="cd-placeholder-3" class="cd-section cd-container">
+            <h2>内容详情</h2>
+            {% autoescape off %}
+                    {{post.content}}
+                {% endautoescape %}
+        </section> <!-- #cd-placeholder-3 -->
+
+
+
+
+
+
+        <section id="cd-placeholder-4" class="cd-section cd-container">
+            <h2>评论</h2>
+          
+        <!-- 来必力City版安装代码 -->
+        <div id="lv-container" data-id="city" data-uid="MTAyMC8zODQ3Ni8xNTAwNA==">
+        <script type="text/javascript">
+           (function(d, s) {
+               var j, e = d.getElementsByTagName(s)[0];
+
+               if (typeof LivereTower === 'function') { return; }
+
+               j = d.createElement(s);
+               j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+               j.async = true;
+
+               e.parentNode.insertBefore(j, e);
+           })(document, 'script');
+        </script>
+        <noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+        </div>
+        <!-- City版安装代码已完成 -->
+
+      </section>
+
+
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}
+
+        
+        
+        

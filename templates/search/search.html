@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load highlight %}
+{% load static %}
+{% load blog_tags %}
+
+{% if error_msg %}
+ <p>{{ error_msg }}</p>
+{% endif %}
+
+
+{% block content %}
+
+<div class="container">
+  <div id="main" class="gradient">
+  <article class="post" style="border: none;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="_c0qx5fd">搜索结果如下</div>
+      </div> 
+    </div>                
+
+<!--sousuo-->  
+    <section id="section-linemove-1">
+      <div style="margin-top: 2px;">
+        <div class="row">
+          {% if query %}
+            {% for result in page.object_list %}
+             <div class="col-sm-4 col-md-4" style="padding: 0px 2px !important;">
+                <div class="thumbnail">
+                  <a href="{{ result.object.get_absolute_url }}">
+                  <img src="http://pg9h99o86.bkt.clouddn.com/city2.png">
+                  <div class="_tags" >
+                    <small class="_tagsa">
+                      {% highlight result.object.title with query %}
+                    </small>
+                  </div>
+                  </a>
+                  <div class="_tags2" style="background-color: rgb(255, 255, 255);">
+                  <small class="_tagsa2">
+                   {{ result.object.author }}
+                  </small>
+                  </div>
+                  <div class="_tags3" style="background-color: rgb(255, 255, 255);">
+                  <small class="_tagsa3">
+                   <a href="{% url 'blog:category' result.object.category.pk %}">
+                        {% highlight result.object.category.name with query %}
+                    </a>
+                  </small>
+                  </div>
+                   <div class="_tags4" style="background-color: rgb(255, 255, 255);">
+                  <small class="_tagsa4">
+                    <a href="{{ result.object.get_absolute_url }}#comment-area">{{ result.object.comment_set.count }} 评论</a>
+                  </small>
+                  </div>
+                   <div class="_tags5" style="background-color: rgb(255, 255, 255);">
+                  <small class="_tagsa5">
+                    <a href="{{ result.object.get_absolute_url }}" >{{ result.object.views }} 浏览</a>
+                  </small>
+                  </div>
+
+                <div class="caption" style="text-align: left; font-size: 1em; font-family: inherit;">
+                 
+                  
+
+                </div>
+              </div>
+            </div>
+                                                      
+          {% empty %}
+    <div class="no-post">暂时还没有发布的文章！试试我们推荐的吧！</div>
+
+
+      {% endfor %}
+  </div>
+</div>
+</section>
+
+
+
+
+
+ <div class="row">
+                          <div class="col-md-12">
+                              {% if is_paginated %}
+                                          <div style="padding: 2em 0;">
+                                              <ul class="pagination">
+                                                  {% if first %}
+                                                      <li><a href="?page=1">1</a></li>
+                                                  {% endif %}
+                                                  {% if left %}
+                                                      {% if left_has_more %}
+                                                          <li><span>...</span></li>
+                                                      {% endif %}
+                                                      {% for i in left %}
+                                                          <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                                      {% endfor %}
+                                                  {% endif %}
+                                                  <li class="current"><a href="?page={{ page_obj.number }}">{{ page_obj.number }}</a></li>
+                                                  {% if right %}
+                                                      {% for i in right %}
+                                                          <li><a href="?page={{ i }}">{{ i }}</a></li>
+                                                      {% endfor %}
+                                                      {% if right_has_more %}
+                                                          <li><span>...</span></li>
+                                                      {% endif %}
+                                                  {% endif %}
+                                                  {% if last %}
+                                                      <li><a href="?page={{ paginator.num_pages }}">{{ paginator.num_pages }}</a></li>
+                                                  {% endif %}
+                                              </ul>
+                                          </div>
+                      {% endif %}
+         </div>
+    </div>
+
+
+
+           {% if page.has_previous or page.has_next %}
+            <div>
+                {% if page.has_previous %}
+                    <a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous
+                {% if page.has_previous %}</a>{% endif %}
+                |
+                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next
+                &raquo;{% if page.has_next %}</a>{% endif %}
+            </div>
+        {% endif %}
+    {% else %}
+       <div class="no-post">请输入搜索的内容</div>
+        <div class="row">
+                                <div style="border: none; width: 100%;padding: 1em;">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <form class="bs-example bs-example-form" role="search" method="get" id="searchform" action="{% url 'haystack_search' %}">
+                                              <div class="row">
+                                                  <div class="col-md-12">
+                                                      <div class="input-group">
+                                                        <input type="text" placeholder="搜索免费经验" class="search" data-live-search="true" id="basic" style="overflow-y: hidden;border: none" autocomplete="off" name="q">
+                                                          <span class="input-group-btn">
+                                                               <button class="btn2 gradient ripple" style="color: #ffffff !important;"  type="submit">搜索</button>
+                                                          </span>
+                                                      </div><!-- /input-group -->
+                                                  </div><!-- /.col-lg-6 -->
+                                              </div><!-- /.row -->
+                                          </form>
+                                    </div>
+                                 </div>
+                            </div>
+                            </div>
+    {% endif %}
+
+
+
+
+
+
+            </article><!--end Post -->
+        </div><!-- end main -->
+    </div><!-- end container -->
+
+
+
+
+
+{% endblock content %}
